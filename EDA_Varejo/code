@@ -1,0 +1,30 @@
+#Importação das bibliotecas e pacotes usadas neste projeto
+import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import datetime as dt
+import warnings
+warnings.filterwarnings('ignore')
+
+#Carregando os dados
+df = pd.read_csv('EDA_Varejo/data/dataset.csv')
+
+#Verificando a estrutura do dataframa com head() e shape()
+print(df.head())
+print(df.shape)
+
+#Verificando possíveis valores duplicados e/ou nulos
+print(df[df.duplicated()])
+print(df.isnull().sum())
+
+## Pergunta de Negócio 1:
+### Qual Cidade com  Maior Valor de Venda de Produtos da Categoria 'Office Supplies'?
+
+#Colocando a categoria de office supplies em uma variável a parte
+office_supplies = df[df['Categoria'] == 'Office_Supplies']
+#Calculando o valor de venda por cidade
+valor_por_cidade = office_supplies.groupby('Cidade')['Valor_Venda'].sum()
+#valor_por_cidade.idxmax()
+
